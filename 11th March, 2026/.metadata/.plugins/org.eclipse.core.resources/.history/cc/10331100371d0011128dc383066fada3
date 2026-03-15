@@ -1,0 +1,79 @@
+package com.lpu.UserModule.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+//import com.lpu.UserModule.Product;
+import com.lpu.UserModule.ProductFeignClient;
+import com.lpu.UserModule.entity.UserEntity;
+import com.lpu.UserModule.service.UserService;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+	
+
+    @Autowired
+    private UserService service;
+    
+    @GetMapping("/save") //verification
+    public String saveUsers() {
+        return "saved";
+    }
+
+    @PostMapping
+    public UserEntity createUser(@RequestBody UserEntity user) {
+        return service.saveUser(user);
+    }
+
+    @GetMapping
+    public List<UserEntity> getUsers() {
+        return service.getAllUsers();
+    }
+    
+    @GetMapping("/save2")
+	public String saveUser() {
+		System.err.println("hiiiiiiiii");
+		return "User saved";
+	}
+	@GetMapping("/test")
+	public String test(){
+	    return "User Service Working";
+	}
+	
+	@GetMapping("/rt")
+	public ResponseEntity<String> takeDataFromProductService() {
+	String url = "http://localhost:8083/product/data";
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<String> response = template.exchange(url, HttpMethod.GET, null, String.class);
+		return response;
+	}
+	
+	@GetMapping("/rt2")
+	public ResponseEntity<String> takeDataFromProductService2() {
+	String url = "http://localhost:8083/product/all";
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<String> response = template.exchange(url, HttpMethod.GET, null, String.class);
+		return response;
+	}
+
+	    @Autowired
+	    private ProductFeignClient productFeignClient;
+
+	    @GetMapping("/products")
+	    public String getProductInUser() {
+
+	        return productFeignClient.getProduct();
+	    }
+	    
+	    @GetMapping("/products2")
+	    public String saveProductInUser() {
+
+	        return productFeignClient.saveProduct();
+	    }
+	}

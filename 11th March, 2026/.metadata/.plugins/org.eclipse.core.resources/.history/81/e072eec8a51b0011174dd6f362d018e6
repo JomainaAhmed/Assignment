@@ -1,0 +1,5 @@
+package com.lpu.PaymentModule;
+
+public class PaymentRepository {
+
+}

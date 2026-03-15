@@ -1,0 +1,55 @@
+package com.lpu.Product;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/product")
+public class ProductController {
+	
+	 @Autowired
+	    private ProductService service;
+
+	    @PostMapping("/add")
+	    public ProductEntity addProduct(@RequestBody ProductEntity product) {
+	        return service.saveProduct(product);
+	    }
+
+	    @GetMapping("/all")
+	    public List<ProductEntity> getAllProducts() {
+	        return service.getAllProducts();
+	    }
+
+	    @GetMapping("/{id}")
+	    public ProductEntity getProductById(@PathVariable int id) {
+	        return service.getProductById(id);
+	    }
+
+	    @DeleteMapping("/{id}")
+	    public String deleteProduct(@PathVariable int id) {
+	        service.deleteProduct(id);
+	        return "Product deleted successfully";
+	    }
+	    @GetMapping("/data")
+	    public String dataToUser() {
+	    	return "data given to user";
+	    }
+	    
+	    @GetMapping("/get-product")
+	    public String getProduct() {
+	    	return "products: laptop, mobile, book";
+	    }
+	    
+	    @PostMapping("/post-product")
+	    public ProductEntity saveProduct(@RequestBody ProductEntity product) {
+	    	return service.savePro(product);
+	    }
+	}

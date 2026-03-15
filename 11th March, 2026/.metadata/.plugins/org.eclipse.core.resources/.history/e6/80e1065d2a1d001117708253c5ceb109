@@ -1,0 +1,12 @@
+package com.lpu.UserModule;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@FeignClient(name = "PRODUCT")
+public interface ProductFeignClient {
+
+    @PostMapping("/product/getproduct")
+    public String getProduct();
+
+}

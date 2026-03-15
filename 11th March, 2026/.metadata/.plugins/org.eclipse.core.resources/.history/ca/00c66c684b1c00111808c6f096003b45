@@ -1,0 +1,28 @@
+spring.application.name=Api-Gateway
+
+server.port=8888
+
+spring.main.web-application-type=reactive
+
+## User Service
+#spring.cloud.gateway.routes[0].id=UserModule
+#spring.cloud.gateway.routes[0].uri=http://localhost:8081
+#spring.cloud.gateway.routes[0].predicates[0]=Path=/users/**
+#
+## Payment Service
+#spring.cloud.gateway.routes[1].id=PaymentModule
+#spring.cloud.gateway.routes[1].uri=http://localhost:8082
+#spring.cloud.gateway.routes[1].predicates[0]=Path=/payment/**
+#
+## Product Service
+#spring.cloud.gateway.routes[2].id=ProductModule
+#spring.cloud.gateway.routes[2].uri=http://localhost:8083
+#spring.cloud.gateway.routes[2].predicates[0]=Path=/product/**
+
+eureka.client.service-url.defaultZone=http://localhost:8761/registry/eureka
+
+#enable dynamic routing
+spring.cloud.gateway.discovery.locator.enabled=true
+spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+
+#http://localhost:8888/USER-SERVICE/User/save ---> :8081/user/save

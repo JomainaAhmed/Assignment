@@ -1,0 +1,27 @@
+package com.lpu.UserModule.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.lpu.UserModule.entity.UserEntity;
+import com.lpu.UserModule.service.UserService;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserService service;
+
+    @PostMapping
+    public UserEntity createUser(@RequestBody UserEntity user) {
+        return service.saveUser(user);
+    }
+
+    @GetMapping
+    public List<UserEntity> getUsers() {
+        return service.getAllUsers();
+    }
+}

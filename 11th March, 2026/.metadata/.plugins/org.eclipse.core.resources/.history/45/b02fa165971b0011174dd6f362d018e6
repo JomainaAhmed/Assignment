@@ -1,0 +1,5 @@
+package com.lpu.UserModule.service;
+
+public class UserService {
+
+}
